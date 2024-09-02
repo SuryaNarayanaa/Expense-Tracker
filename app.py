@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for ,send_file
 import csv
 from handle_csv import get_all_expenses, add_expense_to_db  ,delete_expense
 
@@ -30,5 +30,12 @@ def delete_expense_route(expense_id):
     return redirect(url_for('index'))
 
 
+@app.route('/download_csv')
+def download_csv():
+    csv_file_path = "expense.csv"
+    
+    
+    
+    return send_file(csv_file_path, as_attachment=True)
 if __name__ == '__main__':
     app.run(debug=True)
